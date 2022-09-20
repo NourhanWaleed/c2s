@@ -3,10 +3,12 @@ const Stage1 = require('../models/stage1')
 const auth = require('../middleware/auth')
 const router = new express.Router()
 
-router.post('/stage1', auth, async (req, res) => {
+router.use(auth)
+
+router.post('/stage1', async (req, res) => {
     const stage1 = new Stage1({
         ...req.body,
-        owner: req.entry._id
+        owner: req.user._id
     })
 
     try {
