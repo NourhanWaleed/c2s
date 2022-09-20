@@ -27,20 +27,18 @@ const userSchema = new mongoose.Schema({
         trim: true,
        
     },
-  /*  tokens: [{
+    tokens: [{
         token: {
             type: String,
             required: true
         }
-    }]*/
+    }]
 })
-
-
-/*userSchema.methods.toJSON = function () {
+userSchema.methods.toJSON = function () {
     const user = this
     const userObject = user.toObject()
     delete userObject.password
-   // delete userObject.tokens
+    delete userObject.tokens
     return userObject
 }
 
@@ -68,7 +66,7 @@ userSchema.statics.findByCredentials = async function(email, password) {
 
     return user
 }
-*/
+
 // Hash the plain text password before saving
 userSchema.pre('save', async function (next){
     const user = this
