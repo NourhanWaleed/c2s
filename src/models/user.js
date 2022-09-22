@@ -2,6 +2,7 @@ const mongoose = require('mongoose')
 const validator = require('validator')
 const jwt = require('jsonwebtoken')
 const bcrypt = require('bcryptjs')
+const Entry = require('./entry')
 const userSchema = new mongoose.Schema({
     name: {
         type: String,
@@ -34,6 +35,13 @@ const userSchema = new mongoose.Schema({
         }
     }]
 })
+
+userSchema.virtual('entries', {
+    ref: 'Entry',
+    localField: '_id',
+    foreignField: 'owner'
+})
+
 userSchema.methods.toJSON = function () {
     const user = this
     const userObject = user.toObject()
