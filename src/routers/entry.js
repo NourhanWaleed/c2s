@@ -2,8 +2,9 @@ const express = require('express')
 const Entry = require('../models/entry')
 const auth = require('../middleware/auth')
 const router = new express.Router()
+router.use(auth)
 
-router.post('/entry', auth, async (req, res) => {
+router.post('/entry',async (req, res) => {
     const entry = new Entry({
         ...req.body,
         owner: req.user._id
