@@ -63,9 +63,9 @@ const stage4Schema = new mongoose.Schema({
         type: String,
         
     },
-        Attic_Insulation_Notes:{
-            type:String
-        }
+    Attic_Insulation_Notes:{
+        type:String
+    }
     ,
     Attic_Insulation_Quality_pic: {
         type: Buffer
