@@ -23,7 +23,7 @@ const stage5Schema = new mongoose.Schema({
     owner: {
         type: mongoose.Schema.Types.ObjectId,
         required: true,
-        ref: 'User'
+        ref: 'Entry'
     },
     Wall_Insulation: {
         type: Boolean,

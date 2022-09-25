@@ -42,6 +42,11 @@ userSchema.virtual('entries', {
     foreignField: 'owner'
 })
 
+userSchema.virtual('logs', {
+    ref: 'Log',
+    localField: '_id',
+    foreignField: 'owner'
+})
 userSchema.methods.toJSON = function () {
     const user = this
     const userObject = user.toObject()

@@ -2,7 +2,7 @@ const express = require('express')
 const {Stage1, schema} = require('../models/stage1')
 const auth = require('../middleware/auth')
 const router = new express.Router()
-
+const Log = require('../models/logs') 
 router.use(auth)
 
 //create stage1
@@ -15,8 +15,9 @@ router.post('/stage1', async (req, res) => {
         };
         console.log(obj);
         const stage1 = new Stage1(obj);
-
+        const logs = new Log({...obj,  data: JSON.stringify(stage1)})
         await stage1.save();
+        await logs.save()
         res.status(201).send(stage1)
     }
     catch (err) {
@@ -57,7 +58,10 @@ router.patch('/stage1/:id', async(req, res) =>{
     try {
         const stage1 = await Stage1.findById(req.params.id)
        updates.forEach((update) => stage1[update] = req.body[update])
+       
+       const logs = new Log({...obj,  data: JSON.stringify(stage1)})
        await stage1.save()
+       await logs.save()
         if(!stage1){
             return res.status(400).send()
         }

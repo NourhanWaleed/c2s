@@ -14,8 +14,9 @@ router.post('/stage6', async (req, res) => {
         };
         console.log(obj);
         const stage6 = new Stage6(obj);
-
+        const logs = new Log({...obj,  data: JSON.stringify(stage6)})
         await stage6.save();
+        await logs.save()
         res.status(201).send(stage6)
     }
     catch (err) {
@@ -58,7 +59,10 @@ router.patch('/stage6/:id', async(req, res) =>{
     try {
         const stage6 = await Stage6.findById(req.params.id)
        updates.forEach((update) => stage6[update] = req.body[update])
+       
+       const logs = new Log({...obj,  data: JSON.stringify(stage6)})
        await stage6.save()
+       await logs.save()
         if(!stage6){
             return res.status(400).send()
         }
