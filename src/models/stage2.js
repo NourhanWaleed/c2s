@@ -17,14 +17,16 @@ const schemaText = Joi.object({
 
     Blower_Door_Starting: Joi.number().required(),
 
-})
-/*const heatSchema = Joi.object({  
-    Heating_system_pic: Joi.any().required()    
+    Notes: Joi.string(),
+
+    Heating_system_pic: Joi.string().required(),
+
+    Water_heater_pic: Joi.string().required(),
+    
+    Concerns_pic: Joi.string()  
+
 })
 
-const waterSchema = Joi.object({
-    Water_heater_pic: Joi.any().required()
-})*/
 
 const stage2Schema = new mongoose.Schema({
     owner: {
@@ -64,15 +66,17 @@ const stage2Schema = new mongoose.Schema({
         type: String
     },
     Heating_system_pic:{
-        type: Buffer,
+        type: String,
+        required: true
         
     },
     Water_heater_pic: {
-        type: Buffer,
+        type: String,
+        required: true
         
     },
     Concerns_pic: {
-        type: Buffer
+        type: String
     }
 });
 

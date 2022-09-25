@@ -14,12 +14,12 @@ const schemaText = Joi.object({
     Certificateof_Insulation: Joi.string().valid('YES', 'NO', 'N/A').required(),
 
     General_Quality_Pictures: Joi.string().valid('YES', 'NO', 'N/A').required(),
-    Pics: Joi.any(),
+    Pics: Joi.string().required(),
     Final_Notes: Joi.string(),
     Blower_Door: Joi.string().required(),
     Nothing_left_behind: Joi.boolean().required(),
     Fan_working: Joi.boolean().required(),
-    Misc_Images: Joi.any(),
+    Misc_Images: Joi.string().required(),
     Positive_review: Joi.string().valid('Not sure', 'Yes', 'No').required()
 })
 
@@ -55,7 +55,8 @@ const stage6Schema = new mongoose.Schema({
         required: true,
     },
     Pics:{
-        type: Buffer
+        type: String,
+        required: true
     },
     Final_Notes: {
         type: String,
@@ -75,10 +76,12 @@ const stage6Schema = new mongoose.Schema({
         required: true
     },
     Misc_Images :{
-        type: Buffer
+        type: String,
+        required: true
     },
     Positive_review: {
-        type: String
+        type: String,
+        required: true
     }
 
 });

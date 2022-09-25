@@ -16,14 +16,14 @@ const schemaText = Joi.object({
     Venilation: Joi.string().valid('YES', 'NO', 'NOT APPLICABLE').required(),
 
     Chimney: Joi.string().valid('YES', 'NO', 'NOT APPLICABLE').required(),
+
     Measurements_Notes: Joi.string(),
-    Attic_Insulation_Notes: Joi.string()
+
+    Attic_Insulation_Notes: Joi.string(),
+
+    Attic_Insulation_Quality_pic: Joi.string().required() 
 
 })
-/*const heatSchema = Joi.object({  
-    Attic_Insulation_Quality_pic: Joi.any().required()    
-})
-*/
 
 const stage4Schema = new mongoose.Schema({
     owner: {
@@ -68,7 +68,7 @@ const stage4Schema = new mongoose.Schema({
     }
     ,
     Attic_Insulation_Quality_pic: {
-        type: Buffer
+        type: String
     }
 });
 

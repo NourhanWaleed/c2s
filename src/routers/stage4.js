@@ -63,7 +63,7 @@ router.get('/stage4/:id', async (req, res) => {
 //edit stage4
 router.patch('/stage4/:id', async(req, res) =>{
     const updates = Object.keys(req.body)
-    const allowedUpdates = ['Attic_Insulation', 'Insulation_Markers', 'Recessed_Lights', 'Bathroom_Fans', 'Measurements', 'Venilation', 'Chimney','Measurements_Notes','Attic_Insulation_Notes']
+    const allowedUpdates = ['Attic_Insulation', 'Insulation_Markers', 'Recessed_Lights', 'Bathroom_Fans', 'Measurements', 'Venilation', 'Chimney','Measurements_Notes','Attic_Insulation_Notes', 'Attic_Insulation_Quality_pic']
     const isValidOperation = updates.every((update) => allowedUpdates.includes(update))
 
     if(!isValidOperation){
