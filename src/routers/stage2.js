@@ -2,8 +2,6 @@ const express = require('express')
 const {Stage2, schemaText, heatSchema, waterSchema} = require('../models/stage2')
 const auth = require('../middleware/auth')
 const router = new express.Router()
-const multer = require('multer')
-const sharp = require('sharp')
 router.use(auth)
 
 //create stage2
@@ -25,26 +23,6 @@ router.post('/stage2', async (req, res) => {
     }
 })
 
-const upload = multer({
-    limits: {
-        fileSize: 1000000
-    },
-    fileFilter(req, file, cb) {
-        if (!file.originalname.match(/\.(jpg|jpeg|png)$/)) {
-            return cb(new Error('Please upload an image'))
-        }
-
-        cb(undefined, true)
-    }
-})
-/*router.post('/stage2/heat', auth, upload.single('heat'), async (req, res) => {
-    const buffer = await sharp(req.file.buffer).resize({ width:250,height:250}).png().toBuffer()
-    req.user.avatar = buffer
-    await req.user.save()
-    res.send()
-}, (error, req, res, next) => {
-    res.status(400).send({ error: error.message })
-})*/
 
 //read stage2
 router.get('/stage2',async (req, res) =>{
@@ -70,7 +48,7 @@ router.get('/stage2/:id', async (req, res) => {
 //edit stage2
 router.patch('/stage2/:id', async(req, res) =>{
     const updates = Object.keys(req.body)
-    const allowedUpdates = ['Knob_Tube', 'Abestos', 'twelvex12', 'Unvented_dryers', 'Moisture_Concerns', 'Blower_Door', 'Blower_Door_Starting', 'Notes']
+    const allowedUpdates = ['Knob_Tube', 'Abestos', 'twelvex12', 'Unvented_dryers', 'Moisture_Concerns', 'Blower_Door', 'Blower_Door_Starting', 'Notes','Heating_system_pic', 'Water_heater_pic','Concerns_pic']
     const isValidOperation = updates.every((update) => allowedUpdates.includes(update))
 
     if(!isValidOperation){

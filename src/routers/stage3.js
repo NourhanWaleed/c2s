@@ -2,8 +2,6 @@ const express = require('express')
 const {Stage3, schemaText} = require('../models/stage3')
 const auth = require('../middleware/auth')
 const router = new express.Router()
-const multer = require('multer')
-const sharp = require('sharp')
 router.use(auth)
 
 //create stage3
@@ -25,18 +23,6 @@ router.post('/stage3', async (req, res) => {
     }
 })
 
-const upload = multer({
-    limits: {
-        fileSize: 1000000
-    },
-    fileFilter(req, file, cb) {
-        if (!file.originalname.match(/\.(jpg|jpeg|png)$/)) {
-            return cb(new Error('Please upload an image'))
-        }
-
-        cb(undefined, true)
-    }
-})
 
 
 //read stage3
@@ -63,7 +49,7 @@ router.get('/stage3/:id', async (req, res) => {
 //edit stage3
 router.patch('/stage3/:id', async(req, res) =>{
     const updates = Object.keys(req.body)
-    const allowedUpdates = ['Air_Sealing', 'Top_plate', 'Wet_Wall', 'Chimney', 'External_Top', 'Bathroom_Fans', 'Gable_Ends','Attic_Access','Basement_Sealed', 'Notes']
+    const allowedUpdates = ['Air_Sealing', 'Top_plate', 'Wet_Wall', 'Chimney', 'External_Top', 'Bathroom_Fans', 'Gable_Ends','Attic_Access','Basement_Sealed', 'Notes','Air_Sealing_pic']
     const isValidOperation = updates.every((update) => allowedUpdates.includes(update))
 
     if(!isValidOperation){

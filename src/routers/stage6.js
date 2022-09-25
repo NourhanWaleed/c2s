@@ -2,8 +2,6 @@ const express = require('express')
 const {Stage6, schemaText} = require('../models/stage6')
 const auth = require('../middleware/auth')
 const router = new express.Router()
-const multer = require('multer')
-const sharp = require('sharp')
 router.use(auth)
 
 //create stage6
@@ -25,18 +23,6 @@ router.post('/stage6', async (req, res) => {
     }
 })
 
-const upload = multer({
-    limits: {
-        fileSize: 1000000
-    },
-    fileFilter(req, file, cb) {
-        if (!file.originalname.match(/\.(jpg|jpeg|png)$/)) {
-            return cb(new Error('Please upload an image'))
-        }
-
-        cb(undefined, true)
-    }
-})
 
 
 //read stage6

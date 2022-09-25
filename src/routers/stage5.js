@@ -2,8 +2,6 @@ const express = require('express')
 const {Stage5, schemaText} = require('../models/stage5')
 const auth = require('../middleware/auth')
 const router = new express.Router()
-const multer = require('multer')
-const sharp = require('sharp')
 router.use(auth)
 
 //create stage5

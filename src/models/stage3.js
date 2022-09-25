@@ -20,13 +20,10 @@ const schemaText = Joi.object({
     Attic_Access: Joi.string().valid('YES', 'NO', 'NOT APPLICABLE').required(),
 
     Basement_Sealed: Joi.string().valid('YES', 'NO', 'NOT APPLICABLE').required(),
-    Notes: Joi.string()
+    Notes: Joi.string(),
+    Air_Sealing_pic: Joi.string().required()   
 
 })
-/*const heatSchema = Joi.object({  
-    Air_Sealing_pic: Joi.any().required()    
-})
-*/
 
 const stage3Schema = new mongoose.Schema({
     owner: {
@@ -76,7 +73,8 @@ const stage3Schema = new mongoose.Schema({
         
     },
     Air_Sealing_pic: {
-        type: Buffer
+        type: String, 
+        required: true
     }
 });
 
