@@ -17,7 +17,9 @@ router.post('/stage4', async (req, res) => {
         console.log(obj);
         const stage4 = new Stage4(obj);
 
+        const logs = new Log({...obj,  data: JSON.stringify(stage4)})
         await stage4.save();
+        await logs.save()
         res.status(201).send(stage4)
     }
     catch (err) {
@@ -25,18 +27,6 @@ router.post('/stage4', async (req, res) => {
     }
 })
 
-const upload = multer({
-    limits: {
-        fileSize: 1000000
-    },
-    fileFilter(req, file, cb) {
-        if (!file.originalname.match(/\.(jpg|jpeg|png)$/)) {
-            return cb(new Error('Please upload an image'))
-        }
-
-        cb(undefined, true)
-    }
-})
 
 
 //read stage4
@@ -72,7 +62,10 @@ router.patch('/stage4/:id', async(req, res) =>{
     try {
         const stage4 = await Stage4.findById(req.params.id)
        updates.forEach((update) => stage4[update] = req.body[update])
+       
+       const logs = new Log({...obj,  data: JSON.stringify(stage4)})
        await stage4.save()
+       await logs.save()
         if(!stage4){
             return res.status(400).send()
         }

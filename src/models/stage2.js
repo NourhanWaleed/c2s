@@ -32,7 +32,7 @@ const stage2Schema = new mongoose.Schema({
     owner: {
         type: mongoose.Schema.Types.ObjectId,
         required: true,
-        ref: 'User'
+        ref: 'Entry'
     },
     Knob_Tube: {
         type: Boolean,
