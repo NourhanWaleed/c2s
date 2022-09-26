@@ -1,6 +1,6 @@
 const app = require('./app')
 const mongoose = require('mongoose')
-const port = process.env.PORT 
+const port = process.env.PORT || 3000
 console.log(port)
 async function start() {
     try {
